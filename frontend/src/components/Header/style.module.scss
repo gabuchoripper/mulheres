@@ -1,0 +1,58 @@
+.headercontent{
+    height: 5rem;
+    max-width: 1120px;
+    padding: 0 2rem;
+    margin: 0 auto;
+    justify-content: space-between;
+    display: flex;
+    align-items:center;
+
+    & img{
+        cursor: pointer;
+    }
+
+}
+
+
+.headerContaier{
+    height: 5rem;
+}
+
+.menunav{
+    display: flex;
+    align-items: center;
+
+    & a{
+        color: var(--white);
+        padding: 0 0.5rem;
+        display: inline-block;
+        position: relative;
+        transition: .2s;
+        &:hover{
+            color: var(--red-900);
+        }
+
+        & + a{
+            margin-left: 2rem;
+        }
+        
+    }
+
+
+    & button{
+        margin-left: 2rem;
+        background: transparent;
+        border: 0;
+        transition: .2s;
+        cursor: pointer;
+        color: var(--white);
+
+        &:hover{
+            transform: scale(1.2);
+            color: var(--red-900);
+            filter: brightness(1.2);
+        }
+    }
+    
+}
+

@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Fórum das Mulheres",
+    "slug": "mobile",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "owner":"gabucho",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "plugins": ["expo-image-picker"],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.heroicadev.mobile"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.heroicadev.mobile"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "62c2824b-4a55-4e84-b2e1-b0661d5146dd"
+      }
+    }
+  }
+}

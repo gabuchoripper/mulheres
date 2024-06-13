@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//criar migration: yarn prisma migrate dev 
+//vai pedir nome da migration, geralmente usar create-table-nomedatabela
+model User {
+  id String @id @default(uuid())
+  name String
+  email String
+  password String
+  empresa String?
+  cnpj String?
+  banner String?
+  admin Boolean @default(false)
+  active Boolean @default(true)
+  inactivedate DateTime?
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+  
+  inscricaoevento InscricaoEvento[]
+  inscricaocurso InscricaoCurso[]
+  deleteuserrequest DeleteUserRequest[]
+  @@map("users")
+}
+
+model Associado{
+  id String @id @default(uuid())
+  name String
+  razaosocial String?
+  ramo String?
+  website String?
+  description String? @db.LongText
+  discount String?
+  imagepath String?
+  created_at  DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime @updatedAt @db.Timestamp(0)
+  @@map("associadas")
+  
+}
+
+model Evento{
+  id String @id @default(uuid())
+  name String
+  descricao String? @db.Text
+  palestrante String?
+  local String? @db.Text
+  data DateTime?
+  vagas Int?
+  label String? @db.Text
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+  @@map("eventos")
+  eventomidia Midia []
+  eventoinscrito InscricaoEvento[]
+  eventoparticipacoes ParticipacoesEventos[]
+}
+
+model Midia{
+  id String @id @default(uuid())
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+  path String @db.Text
+  id_evento String
+  evento Evento @relation(fields: [id_evento], references: [id])
+  @@map("midias")
+}
+
+model InscricaoEvento{
+  id String @id @default(uuid())
+  id_evento String
+  id_user String
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+
+  evento Evento @relation(fields: [id_evento], references: [id])
+  usuario User @relation(fields: [id_user], references: [id])
+  @@map("inscricoeseventos")
+}
+
+
+model ParticipacoesEventos{
+  id String @id @default(uuid())
+  name String @db.Text
+  evento String
+
+  eventoparticipacao Evento @relation(fields: [evento], references: [id])
+  @@map("participacoeseventos")
+}
+
+
+model Curso{
+  id String @id @default(uuid())
+  name String
+  descricao String? @db.Text
+  professor String?
+  local String? @db.Text
+  data DateTime?
+  vagas Int?
+  label String? @db.Text
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+  @@map("cursos")
+  cursomidia MidiaCurso []
+  cursoinscrito InscricaoCurso[]
+
+}
+
+model MidiaCurso{
+  id String @id @default(uuid())
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+  path String @db.Text
+  id_curso String
+  evento Curso @relation(fields: [id_curso], references: [id])
+  @@map("midias_curso")
+}
+
+
+model InscricaoCurso{
+  id String @id @default(uuid())
+  id_curso String
+  id_user String
+
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+
+  curso Curso @relation(fields: [id_curso], references: [id])
+  usuario User @relation(fields: [id_user], references: [id])
+  @@map("inscricoescursos")
+}
+
+model DeleteUserRequest{
+  id String @id @default(uuid())
+  userkey String
+  id_user String
+
+
+  usuario User @relation(fields: [id_user], references: [id])
+  created_at  DateTime?  @default(now()) @db.Timestamp(3)
+  updated_at DateTime? @updatedAt
+  @@map("detel_user_request")
+}

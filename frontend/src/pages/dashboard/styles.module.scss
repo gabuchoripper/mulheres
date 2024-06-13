@@ -1,0 +1,40 @@
+.container{
+    max-width: 1120px;
+    margin:0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+}
+
+.lista{
+    width: 100%;
+    margin: 2rem;
+    list-style-type: none;
+    & li{
+        background-color: #181818;
+        padding: 1rem;
+        transition: all .2s;
+        border-left: 4px solid #3fffa3;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    & li:hover{
+        background-color: #666666;
+    }
+}
+
+.buttonreload{
+    background: transparent;
+    border: none;
+    color: #3fffa3;
+    cursor: pointer;
+    transition: all .2s;
+    margin: 2rem 0;
+    font-size: 2rem;
+    &:hover{
+        color: var(--white);
+    }
+}

@@ -1,0 +1,44 @@
+.container{
+width: 620px;
+color: #fff;
+& h2{
+    margin: 1rem auto;
+}
+}
+
+
+.contaienritem{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    & strong{
+        color:var(--green-900)
+    }
+}
+
+.itemslabel{
+    margin: 1rem auto;
+    
+}
+
+
+.mesainfo{
+    margin: 1rem auto;
+}
+
+.description{
+    word-break: break-all;
+}
+
+.buttonconcluir{
+    cursor: pointer;
+    border: 0;
+    border-radius: .5rem;
+    padding: .5rem;
+    color: var(--red-900);
+    background: rgba(0,0,0,40%);
+    transition: all .2s;
+    &:hover{
+        background: #464646;
+    }
+}

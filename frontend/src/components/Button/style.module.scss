@@ -1,0 +1,14 @@
+.button{
+    background-color: var(--red-900);
+    width: 100%;
+    padding: 10px;
+    margin: 10px ;
+    color: var(--white);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: filter .2s ;
+
+    &:hover{
+        filter:brightness(1.25);
+    }
+}
