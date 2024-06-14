@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "owner": "gabucho",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "plugins": [
       "expo-image-picker",
       ["expo-build-properties",{
@@ -28,7 +28,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#dba99e"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -40,7 +40,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#dba99e"
       },
       "permissions": [
         "android.permission.INTERNET"
