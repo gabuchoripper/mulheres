@@ -13,6 +13,9 @@ import Toast from "react-native-toast-message";
 
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 
+import DateTimePicker from 'react-native-ui-datepicker';
+import dayjs from 'dayjs';
+
 
 
 type EventoProps = {
