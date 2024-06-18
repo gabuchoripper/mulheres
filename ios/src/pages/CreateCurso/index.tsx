@@ -13,7 +13,7 @@ import Toast from "react-native-toast-message";
 
 import RNDateTimePicker, {DateTimePickerEvent} from '@react-native-community/datetimepicker';
 
-import DateTimePicker from 'react-native-ui-datepicker';
+import DateTimePicker, {DateType} from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 
 type CursoProps = {
@@ -28,9 +28,6 @@ type CursoProps = {
     updated_at: string
 }
 
-
-
-
 export default function CreateCurso({navigation}){
 
     const {isAdmin} = useContext(AuthContext);
@@ -38,7 +35,9 @@ export default function CreateCurso({navigation}){
     const insets = useSafeAreaInsets();
 
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState(dayjs());
+    const [strdate, setStrDate] = useState<DateType>(dayjs());
+
+    const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
 
     const [name , setName] = useState('');
@@ -103,10 +102,6 @@ export default function CreateCurso({navigation}){
         showModetimer('time');
     };
 
-
-
-
-
     async function oninsert(){
         try{
 
@@ -147,11 +142,7 @@ export default function CreateCurso({navigation}){
                 vagas,
                 label
 
-
             }
-
-
-
 
             await api.post('/cursos/insert',datainsert).then((response)=>{
                 console.log(response.data)
@@ -170,8 +161,6 @@ export default function CreateCurso({navigation}){
                 })
             })
 
-
-
         }catch (err:AxiosError|any){
             Toast.show({
                 type:'error',
@@ -179,7 +168,6 @@ export default function CreateCurso({navigation}){
                 text2:(!!err.data.response.message)?err.data.response.message:'Erro ao Cadastrar'
             })
         }
-
 
     }
 
@@ -195,45 +183,34 @@ export default function CreateCurso({navigation}){
                         <TextInput onChangeText={(text)=>setProfessor(text)} value={professor} label={'Professor'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                         <TextInput onChangeText={(text)=>setlocal(text)} value={local} label={'Local'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
 
-
-
-
-
-
                         <Pressable onPress={showDatepicker}>
                             <View pointerEvents="none">
                                 <TextInput   value={date.toLocaleDateString()} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                                 {show && (
                                     <DateTimePicker
-                                        date={date}
+                                        date={strdate}
                                         mode='single'
-                                        onChange={(params) => setDate(params.date)}
+                                        onChange={(params) => setStrDate(params.date)}
 
                                     />
                                 )}
                             </View>
                         </Pressable>
 
-                        <Pressable onPress={showTimepicker}>
-                            <View pointerEvents="none">
-                                <TextInput   value={time.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} label={'Hora'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                {showtimer && (
-                                    <DateTimePicker
-                                        testID="dateTimePickertime"
-                                        value={time}
-                                        mode={modetimer}
-                                        is24Hour={true}
-                                        onChange={(event:DateTimePickerEvent , date:Date)=>{onChangetimer(event,date)}}
-
-                                    />
-                                )}
-                            </View>
-                        </Pressable>
-
-
+                            <Pressable onPress={showTimepicker}>
+                                <View pointerEvents="none">
+                                    <TextInput   value={time.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} label={'Hora'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
+                                    {showtimer && (
+                                        <DateTimePicker
+                                            date={strdate}
+                                            mode='single'
+                                            onChange={(params) => setStrDate(params.date)}
+                                        />
+                                    )}
+                                </View>
+                            </Pressable>
 
                         <TextInput onChangeText={(text)=>setVagas(text.trim())} keyboardType={"numeric"} value={vagas} label={'Vagas'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-
                         <Button onPress={oninsert} mode={'contained'}>Gravar</Button>
                     </Card>
                 </View>
