@@ -1,6 +1,6 @@
 import React , {useContext , useState , useEffect , useCallback} from "react";
 
-import {SafeAreaView, View, ScrollView, Image, StyleSheet, Alert, Pressable} from 'react-native' ;
+import {SafeAreaView, View, ScrollView, Image, StyleSheet, Alert, Pressable , DatePickerIOS} from 'react-native' ;
 import {FontAwesome} from "@expo/vector-icons"
 import { Avatar, Button, Card, Text, useTheme , Portal , TextInput} from 'react-native-paper';
 import { useSafeAreaInsets,SafeAreaProvider  } from 'react-native-safe-area-context';
@@ -11,18 +11,10 @@ import styles from './styles'
 import {AxiosError} from "axios";
 import Toast from "react-native-toast-message";
 
+import RNDateTimePicker, {DateTimePickerEvent} from '@react-native-community/datetimepicker';
 
-
-
-
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-
-
-
-
-
-
-
+import DateTimePicker from 'react-native-ui-datepicker';
+import dayjs from 'dayjs';
 
 type CursoProps = {
     name: string,
@@ -46,7 +38,7 @@ export default function CreateCurso({navigation}){
     const insets = useSafeAreaInsets();
 
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(dayjs());
     const [time, setTime] = useState(new Date());
 
     const [name , setName] = useState('');
@@ -79,13 +71,13 @@ export default function CreateCurso({navigation}){
 
     const [modetimer, setModetimer] = useState('time');
     const [showtimer, setShowtimer] = useState(false);
-    const onChange = (event, selectedDate:Date) => {
+    const onChange = (event:DateTimePickerEvent , selectedDate:Date) => {
         const currentDate = selectedDate;
         setShow(false);
         setDate(currentDate);
     };
 
-    const onChangetimer = (event, selectedDate:Date) => {
+    const onChangetimer = (event:DateTimePickerEvent, selectedDate:Date) => {
         const currentDate = selectedDate;
         setShowtimer(false);
         setTime(currentDate);
@@ -212,12 +204,11 @@ export default function CreateCurso({navigation}){
                             <View pointerEvents="none">
                                 <TextInput   value={date.toLocaleDateString()} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                                 {show && (
-                                    <RNDateTimePicker
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={mode}
-                                        is24Hour={true}
-                                        onChange={onChange}
+                                    <DateTimePicker
+                                        date={date}
+                                        mode='single'
+                                        onChange={(params) => setDate(params.date)}
+
                                     />
                                 )}
                             </View>
@@ -227,12 +218,12 @@ export default function CreateCurso({navigation}){
                             <View pointerEvents="none">
                                 <TextInput   value={time.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} label={'Hora'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                                 {showtimer && (
-                                    <RNDateTimePicker
+                                    <DateTimePicker
                                         testID="dateTimePickertime"
                                         value={time}
                                         mode={modetimer}
                                         is24Hour={true}
-                                        onChange={onChangetimer}
+                                        onChange={(event:DateTimePickerEvent , date:Date)=>{onChangetimer(event,date)}}
 
                                     />
                                 )}
