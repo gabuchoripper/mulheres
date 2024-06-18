@@ -38,7 +38,7 @@ function MenuBottomGuest() {
   
   
     if(colorscheme =='light'){
-      currenttheme=lightTheme;
+      currenttheme=darktheme;
     }else{
       currenttheme=darktheme;
     }

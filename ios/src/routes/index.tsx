@@ -4,7 +4,7 @@ import {View} from 'react-native'
 import { ActivityIndicator } from 'react-native-paper';
 import AppRoutes from "./app.routes";
 import GuestRoutes from './guest.routes';
-import * as ImagePicker from 'expo-image-picker';
+
 
 
 

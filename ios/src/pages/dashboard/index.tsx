@@ -133,7 +133,7 @@ export default function Dashboard({navigation}){
                  
             </ScrollView>
             <Portal>
-            <PresidentModal cargo={cargo} visible={visiblePresidentModal} handleHideModal={hidePresidentModal}/>
+                <PresidentModal cargo={cargo} visible={visiblePresidentModal} handleHideModal={hidePresidentModal}/>
             </Portal>
             
            

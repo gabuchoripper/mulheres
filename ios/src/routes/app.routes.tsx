@@ -12,6 +12,7 @@ import Contato from '../pages/contato';
 import ListUsers from "../pages/ListUsers";
 import CreateCurso from "../pages/CreateCurso";
 import Editcurso from "../pages/editcurso";
+import Sobre from '../pages/sobre'
 
 import EditUser from "../pages/editUser";
 
@@ -94,6 +95,7 @@ function DrawerMenu() {
           drawerType: dimensions.width >= 768 ? 'permanent' : 'front'
         }}  >
           <Drawer.Screen  name="Quem somos" component={Dashboard} options={{headerShown:false,unmountOnBlur:true}}/>
+          <Drawer.Screen  name="Sobre" component={Sobre} options={{headerShown:false,unmountOnBlur:true}}/>
           <Drawer.Screen name="Contato" component={Contato} options={{headerShown:false,unmountOnBlur:true}}/>
           <Drawer.Screen name="Cadastro" component={Cadastro} options={{headerShown:false,unmountOnBlur:true}}/>
           <Drawer.Screen name="Listar Usuários" component={ListUsers} options={{headerShown:false,unmountOnBlur:true}}/>
@@ -135,7 +137,7 @@ function AppRoutes() {
   if(colorscheme =='light'){
     currenttheme=lightTheme;
   }else{
-    currenttheme=darktheme;
+    currenttheme=lightTheme;
   }
   const bartheme = `${colorscheme}-content`
 
@@ -151,6 +153,7 @@ function AppRoutes() {
               drawerType: dimensions.width >= 768 ? 'permanent' : 'front'
             }}  >
               <Drawer.Screen name="Quem somos" component={Dashboard} options={{headerShown:false,unmountOnBlur:true}}/>
+              <Drawer.Screen name="Sobre" component={Sobre} options={{headerShown:false,unmountOnBlur:true}}/>
               <Drawer.Screen name="Contato" component={Contato} options={{headerShown:false,unmountOnBlur:true}}/>
               <Drawer.Screen name="Cadastro" component={Cadastro} options={{headerShown:false,unmountOnBlur:true}}/>
               <Drawer.Screen name="Listar Usuários" component={ListUsers} options={{headerShown:false,unmountOnBlur:true}}/>
@@ -179,13 +182,14 @@ function AppRoutes() {
             <Drawer.Navigator defaultStatus='open' screenOptions={{
               drawerType: dimensions.width >= 768 ? 'permanent' : 'front'
             }}  >
-              <Drawer.Screen name="Quem somos" component={Dashboard} options={{headerShown:false,unmountOnBlur:true}}/>
-              <Drawer.Screen name="Contato" component={Contato} options={{headerShown:false,unmountOnBlur:true}}/>
-              <Drawer.Screen name="Minha conta" component={Profile} options={{headerShown:false,unmountOnBlur:true}}/>
-              <Drawer.Screen name="Associadas" component={Associadas} options={{headerShown:false,unmountOnBlur:true}}/>
-              <Drawer.Screen name="Cursos" component={Cursos} options={{headerShown:false,unmountOnBlur:true}}/>
-              <Drawer.Screen name="Eventos" component={Eventos} options={{headerShown:false,unmountOnBlur:true}}/>
-              <Drawer.Screen name="Stack"  component={StackMenu} options={{headerShown:false,drawerItemStyle: { height: 0 }}}/>
+                <Drawer.Screen name="Quem somos" component={Dashboard} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Sobre" component={Sobre} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Contato" component={Contato} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Minha conta" component={Profile} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Associadas" component={Associadas} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Cursos" component={Cursos} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Eventos" component={Eventos} options={{headerShown:false,unmountOnBlur:true}}/>
+                <Drawer.Screen name="Stack"  component={StackMenu} options={{headerShown:false,drawerItemStyle: { height: 0 }}}/>
 
             </Drawer.Navigator>
 

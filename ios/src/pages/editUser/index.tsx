@@ -244,17 +244,17 @@ export default function EditUser({navigation }){
 
                     </Card>
 
-                    <TextInput onChangeText={(text)=>setNome(text.trim())} value={nome} label={'Nome'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                    <TextInput autoCapitalize='none' inputMode='email' keyboardType='email-address' textContentType='emailAddress' onChangeText={(text)=>setEmail(text.trim())} value={email} label={'E-Mail'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
+                    <TextInput onChangeText={(text)=>setNome(text.trim())} value={nome} label={'Nome'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
+                    <TextInput autoCapitalize='none' inputMode='email' keyboardType='email-address' textContentType='emailAddress' onChangeText={(text)=>setEmail(text.trim())} value={email} label={'E-Mail'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
 
 
-                    <TextInput onChangeText={(text)=>setCnpj(text.trim())} value={cnpjMask(cnpj)} label={'CNPJ'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                    <TextInput onChangeText={(text)=>setEmpresa(text.trim())} value={empresa} label={'Empresa'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
+                    <TextInput onChangeText={(text)=>setCnpj(text.trim())} value={cnpjMask(cnpj)} label={'CNPJ'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
+                    <TextInput onChangeText={(text)=>setEmpresa(text.trim())} value={empresa} label={'Empresa'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
 
 
-                    <TextInput onChangeText={(text)=>setSenha(text)} value={senha} returnKeyType='go'secureTextEntry={true} autoCorrect={false} label={'Senha'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined'  maxLength={32} />
+                    <TextInput onChangeText={(text)=>setSenha(text)} value={senha} returnKeyType='go' secureTextEntry={true} autoCorrect={false} label={'Senha'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined'  maxLength={32} />
 
-                    <TextInput onChangeText={(text)=>setConfirmsenha(text)} value={confirmsenha} returnKeyType='go'secureTextEntry={true} autoCorrect={false} label={'Confirme sua senha'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined'  maxLength={32} />
+                    <TextInput onChangeText={(text)=>setConfirmsenha(text)} value={confirmsenha} returnKeyType='go' secureTextEntry={true} autoCorrect={false} label={'Confirme sua senha'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined'  maxLength={32} />
 
 
                     <Button  onPress={handleSubmit} buttonColor={theme.colors.primary} style={[containerstyle.inputs]} icon='account-plus-outline' mode='contained'>Atualizar</Button>

@@ -1,14 +1,19 @@
 import React from 'react'
 
-import { SafeAreaView , StyleSheet  , Image  ,View,ScrollView , Linking, Platform } from 'react-native'
-import {Avatar, Button, Card, Text, useTheme, Portal, IconButton} from 'react-native-paper'
+import { SafeAreaView , StyleSheet    ,View,ScrollView , Platform } from 'react-native';
+import * as Linking from 'expo-linking';
+import {Avatar, Button, Card, Text, useTheme, IconButton} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles'
+import {A} from "@expo/html-elements";
 
 export default function Contato({navigation}){
 
     const theme = useTheme();
+
+    const url = Platform.OS == "ios" ? 'whatsapp://send?phone=5583981930549' : 'whatsapp://send?phone=+5583981930549'
+    const urlinstagram = Platform.OS == 'ios' ?'instagram://user?username=forumdasmulheresdenegocios' : 'https://www.instagram.com/forumdasmulheresdenegocios/';
 
     const insets = useSafeAreaInsets();
     const containerstyle = StyleSheet.create({
@@ -28,9 +33,6 @@ export default function Contato({navigation}){
     })
 
     async function menutoggle(){
-
-
-
         navigation.toggleDrawer()
     }
 
@@ -121,7 +123,12 @@ export default function Contato({navigation}){
                     <Card.Content>
                     <Text style={{color:theme.colors.font}} variant="bodyMedium">contato@forumdasmulheresdenegocios.org</Text>
                     <Card.Actions>
-                        <Button onPress={()=>sendemail()} mode='contained'><Icon size={20} color={'#181818'} name='paper-plane-o'/></Button>
+
+                        <A style={{color:theme.colors.font,backgroundColor:theme.colors.primary,padding:10,paddingHorizontal:20,borderRadius:10}}
+                           href='mailto:contato@forumdasmulheresdenegocios.org'>
+                            <Icon size={20} color={'#181818'} name='paper-plane-o'/>
+                        </A>
+
                         
                         
                     </Card.Actions>
@@ -135,8 +142,19 @@ export default function Contato({navigation}){
                     <Text style={{color:theme.colors.font}} variant="bodyMedium">(83) 98193-0549</Text>
                     </Card.Content>
                     <Card.Actions>
-                        <Button onPress={()=>phone()} mode='contained'><Icon size={20} color={'#181818'} name='phone'/></Button>
-                        <Button onPress={()=>whatsapp()} mode='contained'><Icon size={20} color={'#181818'} name='whatsapp'/></Button>
+
+                        <A style={{color:theme.colors.font,backgroundColor:theme.colors.primary,padding:10,paddingHorizontal:20,borderRadius:10}}
+                           href='tel:83981930549'>
+                            <Icon size={20} color={'#181818'} name='phone'/>
+                        </A>
+
+
+
+
+                        <A style={{color:theme.colors.font,backgroundColor:theme.colors.primary,padding:10,paddingHorizontal:20,borderRadius:10}}
+                           href={url}>
+                            <Icon size={20} color={'#181818'} name='whatsapp'/>
+                        </A>
                         
                     </Card.Actions>
 
@@ -148,9 +166,26 @@ export default function Contato({navigation}){
                     <Text style={{color:theme.colors.font}} variant="bodyMedium">Youtube, FaceBook e Instagram</Text>
                     </Card.Content>
                     <Card.Actions>
-                        <Button onPress={()=>youtube()} mode='contained'><Icon size={20} color={'#181818'} name='youtube'/></Button>
-                        <Button onPress={()=>facebook()} mode='contained'><Icon size={20} color={'#181818'} name='facebook'/></Button>
-                        <Button onPress={()=>instagram()} mode='contained'><Icon size={20}color={'#181818'} name='instagram'/></Button>
+
+
+                        <A style={{color:theme.colors.font,backgroundColor:theme.colors.primary,padding:10,paddingHorizontal:20,borderRadius:10}}
+                           href='https://www.youtube.com/channel/UCHI6uVZmBiKjgNiJgFsTfMw/featured'>
+                            <Icon size={20} color={'#181818'} name='youtube'/>
+                        </A>
+
+
+
+                        <A style={{color:theme.colors.font,backgroundColor:theme.colors.primary,padding:10,paddingHorizontal:20,borderRadius:10}}
+                           href="fb://facewebmodal/f?href=https://www.facebook.com/ForumdasMulheresdeNegocios/">
+                            <Icon size={20} color={'#181818'} name='facebook'/>
+                        </A>
+
+
+
+                        <A style={{color:theme.colors.font,backgroundColor:theme.colors.primary,padding:10,paddingHorizontal:20,borderRadius:10}}
+                           href={urlinstagram}>
+                            <Icon size={20} color={'#181818'} name='instagram'/>
+                        </A>
                     </Card.Actions>
             </Card>
 

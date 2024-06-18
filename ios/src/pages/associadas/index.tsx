@@ -70,7 +70,10 @@ function Associadas({navigation}){
     }
 
     async function handleassociado(id:string){
-        console.log(id)
+        console.log(`associadas/associadainfo/${id}`);
+
+        const result = await api.get(`associadas/associadainfo/${id}`)
+        console.log(result.data)
     }
 
     useEffect(()=>{

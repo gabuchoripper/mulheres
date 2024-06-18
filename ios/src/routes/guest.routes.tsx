@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import {useWindowDimensions , StatusBar}from 'react-native'
 import Dashboard from '../pages/dashboard';
 import Contato from '../pages/contato';
+import Sobre from "../pages/sobre";
 import Cadastro from '../pages/cadastro';
 import Login from '../pages/login';
 import { PaperProvider  , DefaultTheme,Text, overlay } from 'react-native-paper'
@@ -71,6 +72,7 @@ function DrawerMenu() {
           drawerType: dimensions.width >= 768 ? 'permanent' : 'front'
         }}  >
           <Drawer.Screen name="Quem somos" component={Dashboard} options={{headerShown:false}}/>
+          <Drawer.Screen name="Sobre" component={Sobre} options={{headerShown:false}}/>
           <Drawer.Screen name="Contato" component={Contato} options={{headerShown:false}}/>
           
           <Drawer.Screen name="Login" component={Login} options={{headerShown:false}}/>

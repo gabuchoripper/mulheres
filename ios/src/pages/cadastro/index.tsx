@@ -5,6 +5,8 @@ import {useTheme, Card, Text, Avatar, TextInput, Button, IconButton} from 'react
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
+
+
 import { setupApi } from '../../utils/api';
 import { AxiosError } from 'axios';
 
@@ -19,10 +21,12 @@ export default function Cadastro({navigation}){
     const [cnpj , setCnpj] = useState('');
     const [empresa , setEmpresa] = useState('');
 
-    
 
 
     async function handleSubmit() {
+
+
+
         if(!nome || !email || !cnpj || !empresa){
             Toast.show({
                 type:'error',
@@ -116,7 +120,11 @@ export default function Cadastro({navigation}){
         navigation.toggleDrawer()
     }
 
+
+
     return(
+
+
         <SafeAreaView style={containerstyle.container}>
 
             <View style={{borderWidth:0,position:'absolute',top:0,alignSelf:'flex-end',padding:5,zIndex:1000}}>
@@ -140,15 +148,20 @@ export default function Cadastro({navigation}){
                 <Text variant="bodyMedium" style={{fontSize:15,marginVertical:10,textAlign:'center',color:theme.colors.font}}>Preencha os dados abaixo</Text>
             </Card>
 
-            <TextInput onChangeText={(text)=>setNome(text)} value={nome} label={'Nome'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-            <TextInput autoCapitalize='none' inputMode='email' keyboardType='email-address' textContentType='emailAddress' onChangeText={(text)=>setEmail(text.trim())} value={email} label={'E-Mail'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-            <TextInput onChangeText={(text)=>setSenha(text)} value={senha} returnKeyType='go'secureTextEntry={true} autoCorrect={false} label={'Senha'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined'  maxLength={32} />
+            <TextInput onChangeText={(text)=>setNome(text)} value={nome} label={'Nome'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
+            <TextInput autoCapitalize='none' inputMode='email' keyboardType='email-address' textContentType='emailAddress' onChangeText={(text)=>setEmail(text.trim())} value={email} label={'E-Mail'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
+            <TextInput onChangeText={(text)=>setSenha(text)} value={senha} returnKeyType='go' secureTextEntry={true} autoCorrect={false} label={'Senha'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined'  maxLength={32} />
             
-            <TextInput onChangeText={(text)=>setConfirmsenha(text)} value={confirmsenha} returnKeyType='go'secureTextEntry={true} autoCorrect={false} label={'Confirme sua senha'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined'  maxLength={32} />
-            
-            
-            <TextInput onChangeText={(text)=>setCnpj(text)} value={cnpj} label={'CNPJ'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-            <TextInput onChangeText={(text)=>setEmpresa(text)} value={empresa} label={'Empresa'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
+            <TextInput onChangeText={(text)=>setConfirmsenha(text)} value={confirmsenha} returnKeyType='go' secureTextEntry={true} autoCorrect={false} label={'Confirme sua senha'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined'  maxLength={32} />
+
+
+
+            <TextInput onChangeText={(text)=>setCnpj(text)} value={cnpj} label={'CNPJ'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
+
+
+
+
+            <TextInput onChangeText={(text)=>setEmpresa(text)} value={empresa} label={'Empresa'} style={[containerstyle.inputs]} textColor={theme.colors.font} outlineColor={theme.colors.font} autoComplete='off' mode='outlined' />
 
             <Button  onPress={handleSubmit} buttonColor={theme.colors.primary} style={[containerstyle.inputs]} icon='account-plus-outline' mode='contained'>Cadastrar</Button>
 

@@ -26,6 +26,8 @@ registerTranslation('pt', {
   pickDateFromCalendar: 'Selecione no calendário',
   close: 'Fechar',
 })
+
+console.log("teste")
 export default function App() {
   return (
     <NavigationContainer>
