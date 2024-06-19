@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import {View} from 'react-native'
+import {SafeAreaView} from 'react-native'
 import DateTimePicker, {DateType} from 'react-native-ui-datepicker';
-import {Dispatch, SetStateAction} from "react";
+
 import styles from "./styles"
 import {Button} from "react-native-paper";
 
@@ -18,7 +18,7 @@ const DateTimePickerComponent = function ({timePicker,onChange,date,onConfirm}:D
 
 
     return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <DateTimePicker
                 date={date}
                 mode="single"
@@ -27,7 +27,7 @@ const DateTimePickerComponent = function ({timePicker,onChange,date,onConfirm}:D
                 timePicker={timePicker}
             />
             <Button onPress={onConfirm} mode={'contained'}>Ok</Button>
-        </View>
+        </SafeAreaView>
     )
 }
 
