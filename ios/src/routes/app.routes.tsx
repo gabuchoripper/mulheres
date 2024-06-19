@@ -51,7 +51,7 @@ const lightTheme = {
   roundness:2,
   colors:{
     primary:'#dba99e',
-    background:'#fff',
+    background:'#fcedf8',
     accent:'#550000',
     danger:'#ed1c24',
     font:'#181818',

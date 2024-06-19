@@ -75,6 +75,7 @@ export default function CreateCurso({navigation}){
             backgroundColor: theme.colors.background,
             fontFamily: 'sans-serif'  ,
 
+
         }
     })
 
