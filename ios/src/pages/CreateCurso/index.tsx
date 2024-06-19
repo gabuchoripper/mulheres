@@ -1,19 +1,20 @@
-import React , {useContext , useState , useEffect , useCallback} from "react";
+import React , { useState } from "react";
 
-import {SafeAreaView, View, ScrollView, Image, StyleSheet, Alert, Pressable , DatePickerIOS} from 'react-native' ;
-import {FontAwesome} from "@expo/vector-icons"
-import { Avatar, Button, Card, Text, useTheme , Portal , TextInput} from 'react-native-paper';
-import { useSafeAreaInsets,SafeAreaProvider  } from 'react-native-safe-area-context';
+import {SafeAreaView, View, ScrollView, StyleSheet, Pressable } from 'react-native' ;
 
-import {useRoute} from "@react-navigation/native";
-import {api ,AuthContext} from "../../contexts/authContext";
+import { Avatar, Button, Card, useTheme , Portal , TextInput} from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+
+import {api } from "../../contexts/authContext";
 import styles from './styles'
 import {AxiosError} from "axios";
 import Toast from "react-native-toast-message";
 
-import RNDateTimePicker, {DateTimePickerEvent} from '@react-native-community/datetimepicker';
+;
 
-import DateTimePicker, {DateType} from 'react-native-ui-datepicker';
+import  {DateType} from 'react-native-ui-datepicker';
+import {DateTimePickerComponent } from "../../components/DateTimePicker";
 import dayjs from 'dayjs';
 
 type CursoProps = {
@@ -30,24 +31,36 @@ type CursoProps = {
 
 export default function CreateCurso({navigation}){
 
-    const {isAdmin} = useContext(AuthContext);
-    const routeparams = useRoute();
+
     const insets = useSafeAreaInsets();
 
-    const [open, setOpen] = useState(false);
-    const [strdate, setStrDate] = useState<DateType>(dayjs());
 
-    const [date, setDate] = useState(new Date());
+    const [strdate, setStrDate] = useState<DateType>(new Date());
+
+    const [date, setDate] = useState(new Date().toLocaleString());
+    const [selecteddate , setSelecteddate]= useState(new Date())
     const [time, setTime] = useState(new Date());
 
     const [name , setName] = useState('');
     const [descricao , setDescricao] = useState('');
     const [professor , setProfessor] = useState('');
     const [local , setlocal] = useState('');
-    const [data , setData] = useState(undefined);
-    const [hora , setHora] = useState(undefined);
+
     const [vagas , setVagas] = useState('');
     const [label , setLabel] = useState('');
+
+    async function change_strDate(params:{date:DateType}){
+        const {date} = params;
+        setStrDate(date);
+        if(!!date){
+            const mydate = new Date(date.toString());
+            setSelecteddate(mydate)
+            console.log(mydate)
+            setDate(`${mydate.toLocaleDateString()} ${mydate.toLocaleTimeString()}`)
+        }
+
+
+    }
 
     const LeftContent = props => <Avatar.Icon {...props} icon="school" />
     const theme = useTheme();
@@ -68,19 +81,9 @@ export default function CreateCurso({navigation}){
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    const [modetimer, setModetimer] = useState('time');
-    const [showtimer, setShowtimer] = useState(false);
-    const onChange = (event:DateTimePickerEvent , selectedDate:Date) => {
-        const currentDate = selectedDate;
-        setShow(false);
-        setDate(currentDate);
-    };
 
-    const onChangetimer = (event:DateTimePickerEvent, selectedDate:Date) => {
-        const currentDate = selectedDate;
-        setShowtimer(false);
-        setTime(currentDate);
-    };
+
+
 
     const showMode = (currentMode:string) => {
         setShow(true);
@@ -88,19 +91,17 @@ export default function CreateCurso({navigation}){
     };
 
 
-    const showModetimer = (currentMode:string) => {
-        setShowtimer(true);
-        setModetimer(currentMode);
-    };
+
 
 
     const showDatepicker = () => {
+        console.log('teste')
         showMode('date');
     };
 
-    const showTimepicker = () => {
-        showModetimer('time');
-    };
+    const confirmdatepicker = async function(){
+        setShow(false)
+    }
 
     async function oninsert(){
         try{
@@ -110,14 +111,14 @@ export default function CreateCurso({navigation}){
 
 
 
-            var currentdate;
+            let currentdate;
 
-            currentdate = date.getFullYear()         + '-' +
-                pad(date.getMonth() + 1)  + '-' +
-                pad(date.getDate())       + ' ' +
-                pad(time.getHours())      + ':' +
-                pad(time.getMinutes())    + ':' +
-                pad(time.getSeconds());
+            currentdate = selecteddate.getFullYear()         + '-' +
+                pad(selecteddate.getMonth() + 1)  + '-' +
+                pad(selecteddate.getDate())       + ' ' +
+                pad(selecteddate.getHours())      + ':' +
+                pad(selecteddate.getMinutes())    + ':' +
+                pad(selecteddate.getSeconds());
 
 
             let objdate = new Date(currentdate);
@@ -125,7 +126,7 @@ export default function CreateCurso({navigation}){
 
 
 
-            if(!!namestring == false){
+            if(!namestring){
                 Toast.show({
                     type:'error',
                     text1:'Erro',
@@ -185,30 +186,17 @@ export default function CreateCurso({navigation}){
 
                         <Pressable onPress={showDatepicker}>
                             <View pointerEvents="none">
-                                <TextInput   value={date.toLocaleDateString()} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                {show && (
-                                    <DateTimePicker
-                                        date={strdate}
-                                        mode='single'
-                                        onChange={(params) => setStrDate(params.date)}
+                                <TextInput value={date} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
 
-                                    />
-                                )}
                             </View>
                         </Pressable>
+                        <Portal >
+                            {show && (
+                                <DateTimePickerComponent timePicker={true} onChange={change_strDate} date={strdate} onConfirm={confirmdatepicker} />
+                            )}
+                        </Portal>
 
-                            <Pressable onPress={showTimepicker}>
-                                <View pointerEvents="none">
-                                    <TextInput   value={time.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} label={'Hora'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                    {showtimer && (
-                                        <DateTimePicker
-                                            date={strdate}
-                                            mode='single'
-                                            onChange={(params) => setStrDate(params.date)}
-                                        />
-                                    )}
-                                </View>
-                            </Pressable>
+
 
                         <TextInput onChangeText={(text)=>setVagas(text.trim())} keyboardType={"numeric"} value={vagas} label={'Vagas'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                         <Button onPress={oninsert} mode={'contained'}>Gravar</Button>
