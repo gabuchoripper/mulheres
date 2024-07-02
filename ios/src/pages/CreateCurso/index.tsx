@@ -11,11 +11,11 @@ import styles from './styles'
 import {AxiosError} from "axios";
 import Toast from "react-native-toast-message";
 
-;
+
 
 import  {DateType} from 'react-native-ui-datepicker';
 import {DateTimePickerComponent } from "../../components/DateTimePicker";
-import dayjs from 'dayjs';
+
 
 type CursoProps = {
     name: string,
@@ -39,7 +39,7 @@ export default function CreateCurso({navigation}){
 
     const [date, setDate] = useState(new Date().toLocaleString());
     const [selecteddate , setSelecteddate]= useState(new Date())
-    const [time, setTime] = useState(new Date());
+
 
     const [name , setName] = useState('');
     const [descricao , setDescricao] = useState('');

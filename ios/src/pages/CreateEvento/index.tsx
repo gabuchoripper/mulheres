@@ -1,20 +1,21 @@
-import React , {useContext , useState , useEffect , useCallback} from "react";
+import React , { useState } from "react";
 
 import {SafeAreaView, View, ScrollView, Image, StyleSheet, Alert, Pressable} from 'react-native' ;
-import {FontAwesome} from "@expo/vector-icons"
+
 import { Avatar, Button, Card, Text, useTheme , Portal , TextInput} from 'react-native-paper';
 import { useSafeAreaInsets,SafeAreaProvider  } from 'react-native-safe-area-context';
 
-import {useRoute} from "@react-navigation/native";
+
 import {api ,AuthContext} from "../../contexts/authContext";
 import styles from './styles'
 import {AxiosError} from "axios";
 import Toast from "react-native-toast-message";
 
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import  {DateType} from 'react-native-ui-datepicker';
+import {DateTimePickerComponent } from "../../components/DateTimePicker";
 
-import DateTimePicker from 'react-native-ui-datepicker';
-import dayjs from 'dayjs';
+
 
 
 
@@ -35,13 +36,13 @@ type EventoProps = {
 
 
 export default function CreateEvento({navigation}){
-
-    const {isAdmin} = useContext(AuthContext);
-    const routeparams = useRoute();
     const insets = useSafeAreaInsets();
 
-    const [open, setOpen] = useState(false);
-    const [date, setDate] = useState(new Date());
+
+    const [strdate, setStrDate] = useState<DateType>(new Date());
+
+    const [date, setDate] = useState(new Date().toLocaleString());
+    const [selecteddate , setSelecteddate]= useState(new Date())
     const [time, setTime] = useState(new Date());
 
     const [name , setName] = useState('');
@@ -120,12 +121,12 @@ export default function CreateEvento({navigation}){
 
             var currentdate;
 
-            currentdate = date.getFullYear()         + '-' +
-                pad(date.getMonth() + 1)  + '-' +
-                pad(date.getDate())       + ' ' +
-                pad(time.getHours())      + ':' +
-                pad(time.getMinutes())    + ':' +
-                pad(time.getSeconds());
+            currentdate = selecteddate.getFullYear()         + '-' +
+                pad(selecteddate.getMonth() + 1)  + '-' +
+                pad(selecteddate.getDate())       + ' ' +
+                pad(selecteddate.getHours())      + ':' +
+                pad(selecteddate.getMinutes())    + ':' +
+                pad(selecteddate.getSeconds());
 
 
             let objdate = new Date(currentdate);
@@ -186,6 +187,23 @@ export default function CreateEvento({navigation}){
 
     }
 
+    async function change_strDate(params:{date:DateType}){
+        const {date} = params;
+        setStrDate(date);
+        if(!!date){
+            const mydate = new Date(date.toString());
+            setSelecteddate(mydate)
+            console.log(mydate)
+            setDate(`${mydate.toLocaleDateString()} ${mydate.toLocaleTimeString()}`)
+        }
+
+
+    }
+
+    const confirmdatepicker = async function(){
+        setShow(false)
+    }
+
     return(
         <SafeAreaView style={containerstyle.container}>
             <ScrollView style={{width:'100%'}}>
@@ -198,41 +216,17 @@ export default function CreateEvento({navigation}){
                         <TextInput onChangeText={(text)=>setPalestrante(text)} value={palestrante} label={'Palestrante'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                         <TextInput onChangeText={(text)=>setlocal(text)} value={local} label={'Local'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
 
-
-
-
-
-
                         <Pressable onPress={showDatepicker}>
                             <View pointerEvents="none">
-                                <TextInput   value={date.toLocaleDateString()} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                {show && (
-                                    <RNDateTimePicker
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={mode}
-                                        is24Hour={true}
-                                        onChange={onChange}
-                                    />
-                                )}
+                                <TextInput value={date} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
+
                             </View>
                         </Pressable>
-
-                        <Pressable onPress={showTimepicker}>
-                            <View pointerEvents="none">
-                                <TextInput   value={time.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} label={'Hora'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                {showtimer && (
-                                    <RNDateTimePicker
-                                        testID="dateTimePickertime"
-                                        value={time}
-                                        mode={modetimer}
-                                        is24Hour={true}
-                                        onChange={onChangetimer}
-
-                                    />
-                                )}
-                            </View>
-                        </Pressable>
+                        <Portal >
+                            {show && (
+                                <DateTimePickerComponent timePicker={true} onChange={change_strDate} date={strdate} onConfirm={confirmdatepicker} />
+                            )}
+                        </Portal>
 
 
 

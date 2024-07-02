@@ -7420,11 +7420,6 @@ react-native-image-viewing@^0.2.2:
   resolved "https://registry.npmjs.org/react-native-image-viewing/-/react-native-image-viewing-0.2.2.tgz"
   integrity sha512-osWieG+p/d2NPbAyonOMubttajtYEYiRGQaJA54slFxZ69j1V4/dCmcrVQry47ktVKy8/qpFwCpW1eT6MH5T2Q==
 
-react-native-mask-cpf-cnpj@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/react-native-mask-cpf-cnpj/-/react-native-mask-cpf-cnpj-2.0.3.tgz"
-  integrity sha512-Lzh5GhgTmL6mzDcbWOjr3TJ5DU68pbUdP41Ns3zU9Zbf4+ix0fgPmjwmielTmk7Advm4CtPCSHMvZjCb7ILCqg==
-
 react-native-masked-text@^1.13.0:
   version "1.13.0"
   resolved "https://registry.npmjs.org/react-native-masked-text/-/react-native-masked-text-1.13.0.tgz"

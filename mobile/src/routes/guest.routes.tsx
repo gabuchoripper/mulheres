@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import {useWindowDimensions , StatusBar}from 'react-native'
+import {useWindowDimensions , StatusBar , StatusBarProps}from 'react-native'
 import Dashboard from '../pages/dashboard';
 import Contato from '../pages/contato';
 import Sobre from "../pages/sobre";
@@ -7,6 +7,7 @@ import Cadastro from '../pages/cadastro';
 import Login from '../pages/login';
 import { PaperProvider  , DefaultTheme,Text, overlay } from 'react-native-paper'
 import { Appearance } from 'react-native';
+import {StatusBarStyle} from "expo-status-bar";
 
 
 //import {createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -30,7 +31,7 @@ const lightTheme = {
   roundness:2,
   colors:{
     primary:'#dba99e',
-    background:'#fff',
+    background:'#fcedf8',
     accent:'#550000',
     danger:'#ed1c24',
     font:'#181818',
@@ -94,19 +95,19 @@ function GuestRoutes() {
   if(colorscheme =='light'){
     currenttheme=lightTheme;
   }else{
-    currenttheme=darktheme;
+    currenttheme=lightTheme;
   }
-  const bartheme = `${colorscheme}-content` 
+  const bartheme  = `${colorscheme}-content`
   return (
 
     <>
-    <StatusBar barStyle={bartheme} />
-     <PaperProvider theme={currenttheme}>
-      <Stack.Navigator>
-        
-        <Stack.Screen name="Drawer" component={DrawerMenu} options={{ headerShown: false   }} />
-      </Stack.Navigator>
-    </PaperProvider>
+      <StatusBar barStyle={bartheme} />
+       <PaperProvider theme={currenttheme}>
+        <Stack.Navigator>
+
+          <Stack.Screen name="Drawer" component={DrawerMenu} options={{ headerShown: false   }} />
+        </Stack.Navigator>
+      </PaperProvider>
     </>
    
     

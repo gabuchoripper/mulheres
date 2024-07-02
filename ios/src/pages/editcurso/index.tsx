@@ -12,18 +12,9 @@ import {AxiosError} from "axios";
 import Toast from "react-native-toast-message";
 import { useDrawerStatus } from '@react-navigation/drawer';
 
-
-
-
-
 import RNDateTimePicker from '@react-native-community/datetimepicker';
-
-
-
-
-
-
-
+import {DateTimePickerComponent } from "../../components/DateTimePicker";
+import {DateType} from "react-native-ui-datepicker";
 
 type CursoProps = {
     id:string,
@@ -64,7 +55,13 @@ export default function Editcurso({navigation}){
     const insets = useSafeAreaInsets();
 
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState(new Date());
+
+
+
+    const [strdate, setStrDate] = useState<DateType>(new Date());
+
+    const [date, setDate] = useState(new Date().toLocaleString());
+    const [selecteddate , setSelecteddate]= useState(new Date())
     const [time, setTime] = useState(new Date());
 
     const [name , setName] = useState('');
@@ -104,17 +101,9 @@ export default function Editcurso({navigation}){
 
     const [modetimer, setModetimer] = useState('time');
     const [showtimer, setShowtimer] = useState(false);
-    const onChange = (event, selectedDate:Date) => {
-        const currentDate = selectedDate;
-        setShow(false);
-        setDate(currentDate);
-    };
 
-    const onChangetimer = (event, selectedDate:Date) => {
-        const currentDate = selectedDate;
-        setShowtimer(false);
-        setTime(currentDate);
-    };
+
+
 
     const showMode = (currentMode:string) => {
         setShow(true);
@@ -149,18 +138,17 @@ export default function Editcurso({navigation}){
         setProfessor(curso.professor)
 
         let objdate = new Date(curso.data);
-        setDate(objdate)
-        setTime(objdate)
+        setSelecteddate(objdate)
+        setStrDate(objdate)
 
-        console.log(response.data);
+
+        setDate(objdate.toLocaleString())
+
+
     }
 
     async function getinscritos(){
         const response = await api.get(`/cursos/getinscritos/${id}`)
-        console.log(response.data)
-
-
-
         setInscrito(!!response.data.inscricao)
         setListainscritos(response.data.inscritos);
     }
@@ -185,12 +173,12 @@ export default function Editcurso({navigation}){
 
             var currentdate;
 
-            currentdate = date.getFullYear()         + '-' +
-                pad(date.getMonth() + 1)  + '-' +
-                pad(date.getDate())       + ' ' +
-                pad(time.getHours())      + ':' +
-                pad(time.getMinutes())    + ':' +
-                pad(time.getSeconds());
+            currentdate = selecteddate.getFullYear()         + '-' +
+                pad(selecteddate.getMonth() + 1)  + '-' +
+                pad(selecteddate.getDate())       + ' ' +
+                pad(selecteddate.getHours())      + ':' +
+                pad(selecteddate.getMinutes())    + ':' +
+                pad(selecteddate.getSeconds());
 
 
             let objdate = new Date(currentdate);
@@ -260,6 +248,20 @@ export default function Editcurso({navigation}){
 
     }
 
+    async function change_strDate(params:{date:DateType}){
+        const {date} = params;
+        setStrDate(date);
+        if(!!date){
+            const mydate = new Date(date.toString());
+            setSelecteddate(mydate)
+            setDate(`${mydate.toLocaleDateString()} ${mydate.toLocaleTimeString()}`)
+        }
+    }
+
+    const confirmdatepicker = async function(){
+        setShow(false)
+    }
+
     return(
         <SafeAreaView style={containerstyle.container}>
             <ScrollView style={{width:'100%'}}>
@@ -272,41 +274,17 @@ export default function Editcurso({navigation}){
                         <TextInput onChangeText={(text)=>setProfessor(text)} value={professor} label={'Professor'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
                         <TextInput onChangeText={(text)=>setlocal(text)} value={local} label={'Local'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
 
-
-
-
-
-
                         <Pressable onPress={showDatepicker}>
                             <View pointerEvents="none">
-                                <TextInput   value={date.toLocaleDateString()} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                {show && (
-                                    <RNDateTimePicker
-                                        testID="dateTimePicker"
-                                        value={date}
-                                        mode={mode}
-                                        is24Hour={true}
-                                        onChange={onChange}
-                                    />
-                                )}
+                                <TextInput value={date} label={'Data'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
+
                             </View>
                         </Pressable>
-
-                        <Pressable onPress={showTimepicker}>
-                            <View pointerEvents="none">
-                                <TextInput   value={time.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} label={'Hora'} style={[containerstyle.inputs]} autoComplete='off' mode='outlined' />
-                                {showtimer && (
-                                    <RNDateTimePicker
-                                        testID="dateTimePickertime"
-                                        value={time}
-                                        mode={modetimer}
-                                        is24Hour={true}
-                                        onChange={onChangetimer}
-
-                                    />
-                                )}
-                            </View>
-                        </Pressable>
+                        <Portal >
+                            {show && (
+                                <DateTimePickerComponent timePicker={true} onChange={change_strDate} date={strdate} onConfirm={confirmdatepicker} />
+                            )}
+                        </Portal>
 
 
 

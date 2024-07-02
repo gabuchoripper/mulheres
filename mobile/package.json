@@ -33,7 +33,6 @@
     "react-native-gesture-handler": "~2.16.1",
     "react-native-image-crop-picker": "^0.40.0",
     "react-native-image-viewing": "^0.2.2",
-    "react-native-mask-cpf-cnpj": "^2.0.3",
     "react-native-masked-text": "^1.13.0",
     "react-native-paper": "^5.10.0",
     "react-native-paper-dates": "^0.19.8",

@@ -3,7 +3,7 @@
 
     "name": "Fórum das Mulheres",
     "slug": "mobile",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "orientation": "portrait",
     "owner": "gabucho",
     "icon": "./assets/icon.png",
@@ -45,7 +45,7 @@
       "permissions": [
         "android.permission.INTERNET"
       ],
-      "versionCode": 4,
+      "versionCode": 5,
       "package": "com.heroicadev.mobile"
     },
     "web": {

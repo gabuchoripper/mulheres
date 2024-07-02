@@ -26,32 +26,22 @@ import MenuBottomGuest from '../components/menubottomguest';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-
 import { createNativeStackNavigator  } from '@react-navigation/native-stack';
 import Cadastro from '../pages/cadastro';
 import {AuthContext} from '../contexts/authContext';
 import * as ImagePicker from "expo-image-picker";
 
-
-
-
-
 const Stack = createNativeStackNavigator();
-
-
-
-
 
 export type RoutesNavigateParams = {
     Dashboard:undefined;
-   
 }
 const lightTheme = {
   ...DefaultTheme,
   roundness:2,
   colors:{
     primary:'#dba99e',
-    background:'#fff',
+    background:'#fcedf8',
     accent:'#550000',
     danger:'#ed1c24',
     font:'#181818',

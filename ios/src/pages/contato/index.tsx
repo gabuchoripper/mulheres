@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SafeAreaView , StyleSheet    ,View,ScrollView , Platform } from 'react-native';
 import * as Linking from 'expo-linking';
-import {Avatar, Button, Card, Text, useTheme, IconButton} from 'react-native-paper';
+import {Avatar, Card, Text, useTheme, IconButton} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles'
