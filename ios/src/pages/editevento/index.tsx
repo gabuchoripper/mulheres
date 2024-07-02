@@ -2,7 +2,7 @@ import React , {useContext , useState , useEffect , useCallback} from "react";
 
 import {SafeAreaView, View, ScrollView, Image, StyleSheet, Alert, Pressable} from 'react-native' ;
 import {FontAwesome} from "@expo/vector-icons"
-import { Avatar, Button, Card, Text, useTheme , Portal , TextInput} from 'react-native-paper';
+import {Avatar, Button, Card, Text, useTheme, Portal, TextInput, IconButton} from 'react-native-paper';
 import { useSafeAreaInsets,SafeAreaProvider  } from 'react-native-safe-area-context';
 
 import {useRoute , useIsFocused} from "@react-navigation/native";
@@ -259,9 +259,23 @@ export default function Editevento({navigation}){
     const confirmdatepicker = async function(){
         setShow(false)
     }
-
+    async function menutoggle(){
+        navigation.toggleDrawer()
+    }
     return(
         <SafeAreaView style={containerstyle.container}>
+            <View style={{borderWidth:0,position:'relative',top:0,alignSelf:'flex-end',padding:5,zIndex:1000}}>
+                <IconButton
+                    mode={"outlined"}
+
+                    style={{backgroundColor:theme.colors.primary,borderWidth:0}}
+                    icon="menu"
+
+                    size={25}
+                    onPress={menutoggle}
+                />
+            </View>
+
             <ScrollView style={{width:'100%'}}>
                 <View style={{justifyContent:'center',flex:1,alignItems:'center'}}>
 

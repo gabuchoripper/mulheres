@@ -98,7 +98,7 @@ export default  function ListUsers({navigation}){
 
     return(
         <SafeAreaView style={containerstyle.container}>
-            <View style={{borderWidth:0,position:'absolute',top:0,alignSelf:'flex-end',padding:5,zIndex:1000}}>
+            <View style={{borderWidth:0,position:'relative',top:0,alignSelf:'flex-end',padding:5,zIndex:1000}}>
                 <IconButton
                     mode={"outlined"}
 

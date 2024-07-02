@@ -2,7 +2,7 @@ import React , { useState } from "react";
 
 import {SafeAreaView, View, ScrollView, StyleSheet, Pressable } from 'react-native' ;
 
-import { Avatar, Button, Card, useTheme , Portal , TextInput} from 'react-native-paper';
+import {Avatar, Button, Card, useTheme, Portal, TextInput, IconButton} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
@@ -173,8 +173,25 @@ export default function CreateCurso({navigation}){
 
     }
 
+    async function menutoggle(){
+        navigation.toggleDrawer()
+    }
+
     return(
         <SafeAreaView style={containerstyle.container}>
+
+            <View style={{borderWidth:0,position:'relative',top:0,alignSelf:'flex-end',padding:5,zIndex:1000}}>
+                <IconButton
+                    mode={"outlined"}
+
+                    style={{backgroundColor:theme.colors.primary,borderWidth:0}}
+                    icon="menu"
+
+                    size={25}
+                    onPress={menutoggle}
+                />
+            </View>
+
             <ScrollView style={{width:'100%'}}>
                 <View style={{justifyContent:'center',flex:1,alignItems:'center'}}>
 
