@@ -9,9 +9,6 @@ type PresidentModalProps = {
   cargo:Number,
 }
 
-
-
-
 function PresidentModal({visible,handleHideModal,cargo}:PresidentModalProps){
   const theme = useTheme();
   
@@ -21,7 +18,6 @@ function PresidentModal({visible,handleHideModal,cargo}:PresidentModalProps){
       width: null,
       height: null,
       resizeMode: 'contain'
-        
       },
       containerimg:{
         width:'100%',
