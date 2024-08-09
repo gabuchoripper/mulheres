@@ -3,7 +3,7 @@
 
     "name": "Fórum das Mulheres",
     "slug": "mobile",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "orientation": "portrait",
     "owner": "gabucho",
     "icon": "./assets/icon.png",
@@ -15,13 +15,7 @@
           "usesCleartextTraffic": true
         },
         "ios": {
-          "infoPlist": {
-            "NSAppTransportSecurity": [
-              {
-                "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>"
-              }
-            ]
-          }
+          "flipper": true
         }
       }]
     ],
@@ -34,8 +28,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.heroicadev.mobile"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.heroicadev.mobile",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSAllowsLocalNetworking": true,
+          "NSExceptionDomains": {
+            "186.227.203.10": {
+              "NSIncludesSubdomains": true,
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -45,7 +52,7 @@
       "permissions": [
         "android.permission.INTERNET"
       ],
-      "versionCode": 4,
+      "versionCode": 5,
       "package": "com.heroicadev.mobile"
     },
     "web": {
