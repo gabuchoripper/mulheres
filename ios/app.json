@@ -29,7 +29,7 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "buildNumber": "2",
+      "buildNumber": "19300",
       "bundleIdentifier": "com.heroicadev.mobile",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
